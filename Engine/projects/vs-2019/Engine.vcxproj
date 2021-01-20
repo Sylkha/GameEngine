@@ -104,22 +104,29 @@
     <ClInclude Include="..\..\code\headers\internal\initialize.hpp" />
     <ClInclude Include="..\..\code\headers\Kernel.h" />
     <ClInclude Include="..\..\code\headers\Keyboard.hpp" />
+    <ClInclude Include="..\..\code\headers\Light_Component.h" />
     <ClInclude Include="..\..\code\headers\macros.hpp" />
+    <ClInclude Include="..\..\code\headers\Model_Component.h" />
     <ClInclude Include="..\..\code\headers\Render_System.h" />
     <ClInclude Include="..\..\code\headers\Sample_Renderer.hpp" />
     <ClInclude Include="..\..\code\headers\Scene.h" />
     <ClInclude Include="..\..\code\headers\Task.h" />
     <ClInclude Include="..\..\code\headers\Thread_Pool.h" />
+    <ClInclude Include="..\..\code\headers\Timer.h" />
+    <ClInclude Include="..\..\code\headers\Transform_Component.h" />
     <ClInclude Include="..\..\code\headers\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\code\sources\AudioExample.cpp" />
     <ClCompile Include="..\..\code\sources\AudioManager.cpp" />
+    <ClCompile Include="..\..\code\sources\Entity.cpp" />
     <ClCompile Include="..\..\code\sources\finalize.cpp" />
     <ClCompile Include="..\..\code\sources\initialize.cpp" />
     <ClCompile Include="..\..\code\sources\Kernel.cpp" />
     <ClCompile Include="..\..\code\sources\Keyboard.cpp" />
+    <ClCompile Include="..\..\code\sources\Model_Component.cpp" />
+    <ClCompile Include="..\..\code\sources\Render_System.cpp" />
     <ClCompile Include="..\..\code\sources\Sample_Renderer.cpp" />
+    <ClCompile Include="..\..\code\sources\Timer.cpp" />
     <ClCompile Include="..\..\code\sources\Window.cpp" />
     <ClCompile Include="..\..\code\sources\winmain.cpp" />
   </ItemGroup>

@@ -3,52 +3,65 @@
 #include <AudioManager.h>
 
 namespace gameEngine {
-        AudioManager::AudioManager() {
+    AudioManager::AudioManager() {
 
-            // Se inicializa SDL:
+        // Se inicializa SDL:
 
-            if (SDL_Init(SDL_INIT_AUDIO) < 0)
+        if (SDL_Init(SDL_INIT_AUDIO) < 0)
+        {
+            SDL_Log("No se ha podido inicializar SDL2.");
+        }
+        else
+        {
+            if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
             {
-                SDL_Log("No se ha podido inicializar SDL2.");
+                SDL_Log("No se ha podido inicializar el subsistema de audio.");
             }
             else
             {
-                if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+                // Se intenta cargar un sonido y una música:
+
+                Mix_Music* music = nullptr;
+                Mix_Chunk* sound = nullptr;
+
+                if (
+                    !(music = Mix_LoadMUS("C:/Users/silwi/Desktop/Motores Graficos - Angel/GameEngine/Demo/assets/rainforest-ambience.ogg")) ||
+                    !(sound = Mix_LoadWAV("C:/Users/silwi/Desktop/Motores Graficos - Angel/GameEngine/Demo/assets/throw-knife.wav"))
+                    )
                 {
-                    SDL_Log("No se ha podido inicializar el subsistema de audio.");
+                    SDL_Log("No se ha podido cargar el audio.");
                 }
                 else
                 {
-                    // Se intenta cargar un sonido y una música:
+                    // Se inicia la reproducción de la música en bucle con un fundido:
 
-                    Mix_Music* music = nullptr;
-                    Mix_Chunk* sound = nullptr;
+                    Mix_FadeInMusic(music, -1, 4000);
+                    Mix_PlayChannel(-1, sound, 0);     // se reproduce un sonido en un canal libre                      
 
-                    if(
-                            ! (music = Mix_LoadMUS("../../../Demo/assets/rainforest-ambience.ogg")) ||
-                            ! (sound = Mix_LoadWAV("../../../Demo/assets/throw-knife.wav"))
-                            )
-                    {
-                        SDL_Log("No se ha podido cargar el audio.");
-                    }
-                    else
-                    {
-                        // Se inicia la reproducción de la música en bucle con un fundido:
-
-                        Mix_FadeInMusic(music, -1, 4000); // separarlo en métodos
-                        // Mix_PlayChannel(-1, sound, 0);     // se reproduce un sonido en un canal libre                      
-
-                     //   Mix_HaltMusic();
-                     //   Mix_HaltChannel(-1);
-                    }
-
-                  //  if (music) Mix_FreeMusic(music); // liberar memoria
-                  //  if (sound) Mix_FreeChunk(sound);
-
-
-                   // Mix_CloseAudio(); // Para cerrar
+                 //   Mix_HaltMusic();
+                 //   Mix_HaltChannel(-1);
                 }
+
+                //  if (music) Mix_FreeMusic(music); // liberar memoria
+                //  if (sound) Mix_FreeChunk(sound);
+
+
+                 // Mix_CloseAudio(); // Para cerrar
             }
-        
-    };
+        }
+    }
+
+    void AudioManager::PlayMusic() {
+       // Mix_FadeInMusic(music, -1, 4000);
+    }
+    void AudioManager::PlaySound() {
+        // Mix_PlayChannel(-1, sound, 0);     /** se reproduce un sonido en un canal libre */
+    }
+    
+    AudioManager::~AudioManager() {
+        //  if (music) Mix_FreeMusic(music); /** liberar memoria */
+        //  if (sound) Mix_FreeChunk(sound);
+
+        // Mix_CloseAudio(); // Para cerrar
+    }
 }

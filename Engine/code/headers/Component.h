@@ -1,8 +1,11 @@
 #pragma once
+#include "Math.hpp"
 
 namespace gameEngine {
 	class Component {
-		Entity* parent;
-
+		// Entity* parent;
+	public:
+		Component();
+		virtual ~Component() = 0;
 	};
 }

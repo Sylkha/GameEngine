@@ -4,7 +4,7 @@
 // by Ángel
 
 #include <Window.hpp>
-#include <Sample_Renderer.hpp>
+#include <Scene.h>
 #include <AudioManager.h>
 
 using namespace gameEngine;
@@ -19,11 +19,11 @@ int main()
 
     // Se crea un renderer que usa OpenGL Toolkit:
 
-    Sample_Renderer renderer(window);
+    Scene scene(window);
 
     AudioManager audiomanager;
     // Se ejecuta el bucle principal:
-
+/*
     bool exit = false;
 
     while (!exit)
@@ -52,8 +52,7 @@ int main()
             }
         }
 
-        renderer.render();
-    }
+    }*/
 
     return 0;
 }
