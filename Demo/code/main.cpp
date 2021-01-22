@@ -19,9 +19,12 @@ int main()
 
     // Se crea un renderer que usa OpenGL Toolkit:
 
+    //AudioManager audiomanager;
+
     Scene scene(window);
 
-    AudioManager audiomanager;
+
+
     // Se ejecuta el bucle principal:
 /*
     bool exit = false;

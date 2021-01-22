@@ -1,3 +1,7 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #pragma once
 #include "Component.h"
 #include "Model.hpp"
@@ -11,7 +15,7 @@ namespace gameEngine {
 	public:
 		shared_ptr <Model> model;
 
-		Model_Component();
+		Model_Component() {}
 
 		void set_model(shared_ptr <Model> _model) { model = _model; }
 		shared_ptr<Model> get_model() { return model; }

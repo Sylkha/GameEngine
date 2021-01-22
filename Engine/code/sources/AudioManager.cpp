@@ -1,3 +1,5 @@
+
+
 #include <SDL.h>
 #include <SDL_mixer.h>
 #include <AudioManager.h>
@@ -25,8 +27,8 @@ namespace gameEngine {
                 Mix_Chunk* sound = nullptr;
 
                 if (
-                    !(music = Mix_LoadMUS("C:/Users/silwi/Desktop/Motores Graficos - Angel/GameEngine/Demo/assets/rainforest-ambience.ogg")) ||
-                    !(sound = Mix_LoadWAV("C:/Users/silwi/Desktop/Motores Graficos - Angel/GameEngine/Demo/assets/throw-knife.wav"))
+                    !(music = Mix_LoadMUS("../../assets/rainforest-ambience.ogg")) ||
+                    !(sound = Mix_LoadWAV("../../assets/throw-knife.wav"))
                     )
                 {
                     SDL_Log("No se ha podido cargar el audio.");
@@ -55,7 +57,7 @@ namespace gameEngine {
        // Mix_FadeInMusic(music, -1, 4000);
     }
     void AudioManager::PlaySound() {
-        // Mix_PlayChannel(-1, sound, 0);     /** se reproduce un sonido en un canal libre */
+      //  Mix_PlayChannel(-1, sound, 0);     /** se reproduce un sonido en un canal libre */
     }
     
     AudioManager::~AudioManager() {

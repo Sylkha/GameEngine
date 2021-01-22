@@ -1,8 +1,13 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #pragma once
 
 #include <set>
 #include "Task.h"
 #include <Timer.h>
+#include <Window.hpp>
 
 using namespace std; 
 
@@ -22,6 +27,6 @@ namespace gameEngine {
 		/** Para parar la función run */
 		void stop() { stopped = true; }
 
-		void run();
+		void run(Window & window);
 	};
 }
