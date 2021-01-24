@@ -13,12 +13,8 @@
 namespace gameEngine {
 	Render_System::Render_System(Scene& scene, int priority) : Task(scene, priority) { priority = 1; renderer.reset(new Render_Node); }
 
-	void Render_System::initialize() {
-
-	}
-	void Render_System::finalize() {
-
-	}
+	void Render_System::initialize() { }
+	void Render_System::finalize() { }
 
 	void Render_System::addObject(string ID, shared_ptr<Model>model) {
 		renderer->add(ID, model);
@@ -35,31 +31,27 @@ namespace gameEngine {
 	}
 
 	void Render_System::run(float time) {
-        // Se ajusta el viewport por si el tamaño de la ventana ha cambiado:
-
+		/** Se ajusta el viewport por si el tamaño de la ventana ha cambiado: */
         GLsizei width = GLsizei(scene.get_window().get_width());
         GLsizei height = GLsizei(scene.get_window().get_height());
-		//Actualizamos transforms
+		
 		renderer->get_active_camera()->set_aspect_ratio(float(width) / height);
+
 		auto& entities = scene.getEntities();
 		/** Actualizamos los transform */
 		for (auto& entity : entities) {
-			// Coger el model component y actualizar el transform. 
-			// Coger camera y light components
 			Model_Component* model = dynamic_cast<Model_Component*>(entity.second->getComponent("model"));
-			if (model) { model->get_model()->set_transformation(entity.second->get_transform()); }
-			Camera_Component* camera = dynamic_cast<Camera_Component*>(entity.second->getComponent("camera"));
-			if (camera) { camera->get_camera()->set_transformation(entity.second->get_transform()); }
-			Light_Component* light = dynamic_cast<Light_Component*>(entity.second->getComponent("light"));
+			if (model) model->get_model()->set_transformation(entity.second->get_transform()); 
 
-			if (light)
-			{ 
-				light->get_light()->set_transformation(entity.second->get_transform()); }
+			Camera_Component* camera = dynamic_cast<Camera_Component*>(entity.second->getComponent("camera"));
+			if (camera) camera->get_camera()->set_transformation(entity.second->get_transform()); 
+			
+			Light_Component* light = dynamic_cast<Light_Component*>(entity.second->getComponent("light"));
+			if (light) light->get_light()->set_transformation(entity.second->get_transform()); 
 
 		}
-        // Se renderiza la escena y se intercambian los buffers de la ventana para
-        // hacer visible lo que se ha renderizado:
 
+        /** Se renderiza la escena y se intercambian los buffers de la ventana para hacer visible lo que se ha renderizado: */
 		scene.get_window().clear();
 
         renderer->render();
