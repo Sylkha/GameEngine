@@ -29,7 +29,7 @@ namespace gameEngine {
 		virtual void initialize() = 0;
 		virtual void finalize() = 0;
 		bool operator <(const Task& x)const {		/** Sobrecargamos el operador */
-			return this-> priority > x.priority;
+			return this-> priority < x.priority;
 		}  
 	};
 }

@@ -11,6 +11,9 @@
 #include "Model_Component.h"
 #include "Light_Component.h"
 #include <Cube.hpp>
+#include "Messenger.h"
+#include "Controller.h"
+#include "Update_Task.h"
 
 using namespace std;
 namespace gameEngine {
@@ -18,13 +21,17 @@ namespace gameEngine {
 		Window& window;
 		Kernel kernel;
 		Render_System render_system;
-		
+		Update_Task update_task;
 
 		typedef map <string, shared_ptr<Entity>> entityList;
 		entityList entities;
 
+		Messenger messenger;
+		map <string, shared_ptr<Controller>> controllers;
+
 	public:
-		Scene(Window& w) : window(w), render_system(*this, render_system.priority) { 
+		Scene(Window& w) : window(w), render_system(*this, 1), update_task(*this, 0) { 
+			kernel.add_task(update_task);
 			kernel.add_task(render_system);
 			/** Creamos los entities */
 			shared_ptr<Entity> entity_camera = make_shared<Entity>(*this, "camera");
@@ -48,11 +55,6 @@ namespace gameEngine {
 			entity_camera->set_transform(translate(entity_camera->get_transform(), Vector3(0.f, 0.f, 0.f)));
 			entity_light->set_transform(translate(entity_light->get_transform(), Vector3(10.f, 10.f, 10.f)));
 			
-			// Ejemplo de escala
-			//entity_model->set_transform(scale(entity_model->get_transform(), 1.f));
-			//entity_light->set_transform(scale(entity_light->get_transform(), 1.f));
-			//entity_camera->set_transform(scale(entity_camera->get_transform(), 1.f));
-			
 			/** Añadimos los nodos a la escena */
 			render_system.addObject(entity_camera->get_IDNombre(), camera_component->get_camera());
 			render_system.setActiveCamera(entity_camera->get_IDNombre());
@@ -72,6 +74,18 @@ namespace gameEngine {
 			return window;
 		}
 		entityList& getEntities() { return entities; }
+
+		Messenger& getMessenger() { return messenger; }
+
+		bool addController(string id, shared_ptr<Controller> controller)
+		{ 
+			if (controllers.count(id) != 0) // Si ese id existe, no lo añadimos
+				return false;
+			else {
+				controllers[id] = controller;
+				return true;
+			}
+		}
 
 		void run() {
 			kernel.run(window);

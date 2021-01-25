@@ -11,7 +11,7 @@
 
 
 namespace gameEngine {
-	Render_System::Render_System(Scene& scene, int priority) : Task(scene, priority) { priority = 1; renderer.reset(new Render_Node); }
+	Render_System::Render_System(Scene& scene, int priority) : Task(scene, priority) { renderer.reset(new Render_Node); }
 
 	void Render_System::initialize() { }
 	void Render_System::finalize() { }

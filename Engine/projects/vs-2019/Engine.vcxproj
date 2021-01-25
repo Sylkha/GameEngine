@@ -99,6 +99,8 @@
     <ClInclude Include="..\..\code\headers\AudioManager.h" />
     <ClInclude Include="..\..\code\headers\Camera_Component.h" />
     <ClInclude Include="..\..\code\headers\Component.h" />
+    <ClInclude Include="..\..\code\headers\Controller.h" />
+    <ClInclude Include="..\..\code\headers\Controller_Component.h" />
     <ClInclude Include="..\..\code\headers\Entity.h" />
     <ClInclude Include="..\..\code\headers\internal\declarations.hpp" />
     <ClInclude Include="..\..\code\headers\internal\initialize.hpp" />
@@ -106,7 +108,10 @@
     <ClInclude Include="..\..\code\headers\Keyboard.hpp" />
     <ClInclude Include="..\..\code\headers\Light_Component.h" />
     <ClInclude Include="..\..\code\headers\macros.hpp" />
+    <ClInclude Include="..\..\code\headers\Message.h" />
+    <ClInclude Include="..\..\code\headers\Messenger.h" />
     <ClInclude Include="..\..\code\headers\Model_Component.h" />
+    <ClInclude Include="..\..\code\headers\Observer.h" />
     <ClInclude Include="..\..\code\headers\Render_System.h" />
     <ClInclude Include="..\..\code\headers\Sample_Renderer.hpp" />
     <ClInclude Include="..\..\code\headers\Scene.h" />
@@ -114,6 +119,7 @@
     <ClInclude Include="..\..\code\headers\Thread_Pool.h" />
     <ClInclude Include="..\..\code\headers\Timer.h" />
     <ClInclude Include="..\..\code\headers\Transform_Component.h" />
+    <ClInclude Include="..\..\code\headers\Update_Task.h" />
     <ClInclude Include="..\..\code\headers\Window.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +133,7 @@
     <ClCompile Include="..\..\code\sources\Render_System.cpp" />
     <ClCompile Include="..\..\code\sources\Sample_Renderer.cpp" />
     <ClCompile Include="..\..\code\sources\Timer.cpp" />
+    <ClCompile Include="..\..\code\sources\Update_Task.cpp" />
     <ClCompile Include="..\..\code\sources\Window.cpp" />
     <ClCompile Include="..\..\code\sources\winmain.cpp" />
   </ItemGroup>
