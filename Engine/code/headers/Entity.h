@@ -13,12 +13,13 @@
 using namespace std;
 namespace gameEngine {
 	class Scene;
-	/** Esto es como el gameObject de Unity */
+	/** Esto es como el gameObject de Unity. Es un contenedor de componentes con el objetivo de llegar a un comportamiento en concreto a través de ellos. */
 	class Entity {
 		typedef string Id;
 		map<Id, Component*> components; 
 		Transform_Component transform;
 		shared_ptr <Entity> parent;
+		/** Este id es único */
 		string IDNombre;
 
 		Scene& scene;
@@ -26,7 +27,7 @@ namespace gameEngine {
 	public:
 		Entity(Scene& scene, string IDNombre) : scene(scene), IDNombre(IDNombre) { parent = nullptr; };
 
-		/** Añadimos componentes a nuestro objeto/entity */
+		/** Añadimos componentes a nuestro entity */
 		void addComponent(Id, Component* c);
 		/** Busca en el mapa el id para devolver el respectivo componente */
 		Component* getComponent(const Id& id);

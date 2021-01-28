@@ -6,8 +6,8 @@
 #include "Math.hpp"
 
 namespace gameEngine {
+	/** Componente padre */
 	class Component {
-		// Entity* parent;
 	public:
 		Component(){}
 		virtual ~Component() = 0 {}

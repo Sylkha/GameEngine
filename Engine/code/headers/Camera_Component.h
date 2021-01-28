@@ -8,7 +8,9 @@
 
 using namespace std;
 using namespace glt;
+
 namespace gameEngine {
+/** Componente para añadir una cámara a un entity */
 	class Camera_Component : public Component {
 	public:
 		shared_ptr<Camera> camera;

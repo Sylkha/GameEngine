@@ -7,18 +7,11 @@
 
 using namespace glt;
 namespace gameEngine {
+	/** Componente transform en donde manejamos posición, rotación y escala */
 	class Transform_Component: public Component {
 	public:
 		Matrix44 transform;
 
-		Transform_Component() {
-			/*transform =
-			{
-				{ 1.0f, 0.0f, 0.0f, 0.0f },
-				{ 0.0f, 1.0f, 0.0f, 0.0f },
-				{ 0.0f, 0.0f, 1.0f, 0.0f },
-				{ 0.0f, 0.0f, 0.0f, 1.0f },
-			};*/
-		}
+		Transform_Component() { }
 	};
 }

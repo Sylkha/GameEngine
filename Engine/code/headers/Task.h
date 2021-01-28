@@ -5,17 +5,20 @@
 #pragma once
 
 namespace gameEngine {
-	class Scene; /** Declaración anticipada porque las task van en Scene */
+	/** Declaración anticipada porque las task van en Scene */
+	class Scene; 
 
 	class Task {
 	public:
-		int priority; /** número más pequeño, + prioridad. */
+		/** número más pequeño, + prioridad. */
+		int priority; 
 
 		struct Task_Less_Compare
 		{
 			bool operator () (const Task* a, const Task* b) const
 			{
-				return *a < *b;       // Se usa el operador < sobrecargado en la clase Task
+				/** Se usa el operador < sobrecargado en la clase Task */
+				return *a < *b;       
 			}
 		};
 
@@ -24,11 +27,14 @@ namespace gameEngine {
 
 	public:
 		Task(Scene& scene, int priority) : scene(scene), priority(priority){}
-		virtual bool consumable () const = 0; /** indicamos al Kernel si nos tiene que ejecutar una vez o hasta que termine el programa. Devuelve true o false */
-		virtual void run(float time) = 0;		 /** método virtual puro, por lo que haremos tareas especificas que hereden de Task. */
+		/** indicamos al Kernel si nos tiene que ejecutar una vez o hasta que termine el programa. Devuelve true o false */
+		virtual bool consumable () const = 0; 
+		/** método virtual puro, por lo que haremos tareas especificas que hereden de Task. */
+		virtual void run(float time) = 0;		 
 		virtual void initialize() = 0;
 		virtual void finalize() = 0;
-		bool operator <(const Task& x)const {		/** Sobrecargamos el operador */
+		/** Sobrecargamos el operador < para que el set ponga en orden de prioridad las Tasks */
+		bool operator <(const Task& x)const {		
 			return this-> priority < x.priority;
 		}  
 	};

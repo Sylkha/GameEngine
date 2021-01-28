@@ -102,6 +102,8 @@
     <ClInclude Include="..\..\code\headers\Controller.h" />
     <ClInclude Include="..\..\code\headers\Controller_Component.h" />
     <ClInclude Include="..\..\code\headers\Entity.h" />
+    <ClInclude Include="..\..\code\headers\Input_Mapper.h" />
+    <ClInclude Include="..\..\code\headers\Input_Task.h" />
     <ClInclude Include="..\..\code\headers\internal\declarations.hpp" />
     <ClInclude Include="..\..\code\headers\internal\initialize.hpp" />
     <ClInclude Include="..\..\code\headers\Kernel.h" />
@@ -127,6 +129,8 @@
     <ClCompile Include="..\..\code\sources\Entity.cpp" />
     <ClCompile Include="..\..\code\sources\finalize.cpp" />
     <ClCompile Include="..\..\code\sources\initialize.cpp" />
+    <ClCompile Include="..\..\code\sources\Input_Mapper.cpp" />
+    <ClCompile Include="..\..\code\sources\Input_Task.cpp" />
     <ClCompile Include="..\..\code\sources\Kernel.cpp" />
     <ClCompile Include="..\..\code\sources\Keyboard.cpp" />
     <ClCompile Include="..\..\code\sources\Model_Component.cpp" />

@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\..\Engine\code\headers;..\..\..\Engine\libraries/sdl2-2.0/include;..\..\..\Engine\libraries/opengl-toolkit/include;..\..\..\Engine\libraries/sdl2-mixer-vs/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Engine\code\headers;..\..\..\Engine\libraries/sdl2-2.0/include;..\..\..\Engine\libraries/opengl-toolkit/include;..\..\..\Engine\libraries/sdl2-mixer-vs/include;..\..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -146,6 +146,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\code\main.cpp" />
+    <ClCompile Include="..\..\code\Player_Controller.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\Player_Controller.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

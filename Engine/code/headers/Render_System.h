@@ -19,7 +19,8 @@ using namespace glt;
 namespace gameEngine {
 	class Scene;
 	class Render_System : public Task {
-		unique_ptr< Render_Node > renderer; //Lo que nos va a permitir dibujar un conjunto de mallas		
+		/** El renderer node es lo que nos va a permitir dibujar un conjunto de mallas. */
+		unique_ptr< Render_Node > renderer; 	
 
 	public:
 		Render_System(Scene& scene, int priority);

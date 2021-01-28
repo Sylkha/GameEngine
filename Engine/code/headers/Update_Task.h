@@ -1,7 +1,12 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #pragma once
 #include "Task.h"
 
 namespace gameEngine {
+	/** Ejecuta el run de los Controladores */
 	class Scene;
 	class Update_Task : public Task {
 	public:

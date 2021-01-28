@@ -1,3 +1,8 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
+
 #pragma once
 
 #include <map>
@@ -7,18 +12,24 @@
 
 using namespace std;
 namespace gameEngine {
+	/** Esta clase es la encargada de enviar los mensajes a los Observers que estén suscritos a un evento (id) */
 	class Messenger {
-		map <string, list<Observer*>> observers; // varios observers pueden suscribirse a un solo evento
-
+		/** Varios observers pueden suscribirse a un solo evento */
+		map <string, list<Observer*>> observers; 
+	public:
 		/** Los observers son unicos por cada id */
 		bool add_Observer(string id, Observer* observer) {
 			bool found = false;
+			/** Buscamos el id en el mapa, y si coincide el id (existe en el mapa), buscamos el observer que queremos */
 			for (auto& obs : observers) {
-				list<Observer*>::iterator ite;
-				ite = find(obs.second.begin(), obs.second.end(), observer);
-				/** Si no llega al final es que ha encontrado algo */
-				if (ite != obs.second.end())
-					found = true;
+				if (obs.first == id) {
+					list<Observer*>::iterator ite;
+					ite = find(obs.second.begin(), obs.second.end(), observer);
+					/** Si no llega al final es que ha encontrado algo */
+					if (ite != obs.second.end())
+						found = true;
+					break;
+				}
 			}
 			
 			if (!found)

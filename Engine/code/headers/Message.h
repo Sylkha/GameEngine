@@ -1,3 +1,7 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #pragma once
 
 #include <string>

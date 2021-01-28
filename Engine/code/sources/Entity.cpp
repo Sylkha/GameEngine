@@ -19,7 +19,7 @@ namespace gameEngine {
 	}
 
 	Matrix44 Entity::get_transform() {
-		/** Posición relativa al del padre. Se tiene solo en cuenta aquí porque en el Render System ya hacemos esta transformación al hacer el get */
+		/** Posición relativa al del padre. */
 		if(parent){
 			return parent->get_transform() * transform.transform;
 	    }

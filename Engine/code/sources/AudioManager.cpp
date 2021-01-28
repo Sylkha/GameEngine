@@ -1,7 +1,7 @@
 
 
 #include <SDL.h>
-#include <SDL_mixer.h>
+//#include <SDL_mixer.h>
 #include <AudioManager.h>
 
 namespace gameEngine {
@@ -12,58 +12,55 @@ namespace gameEngine {
         if (SDL_Init(SDL_INIT_AUDIO) < 0)
         {
             SDL_Log("No se ha podido inicializar SDL2.");
+            canPlayMusic = false;
         }
         else
         {
             if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
             {
                 SDL_Log("No se ha podido inicializar el subsistema de audio.");
+                canPlayMusic = false;
             }
             else
             {
-                // Se intenta cargar un sonido y una música:
-
-                Mix_Music* music = nullptr;
-                Mix_Chunk* sound = nullptr;
-
-                if (
-                    !(music = Mix_LoadMUS("../../assets/rainforest-ambience.ogg")) ||
-                    !(sound = Mix_LoadWAV("../../assets/throw-knife.wav"))
-                    )
-                {
-                    SDL_Log("No se ha podido cargar el audio.");
-                }
-                else
-                {
-                    // Se inicia la reproducción de la música en bucle con un fundido:
-
-                    Mix_FadeInMusic(music, -1, 4000);
-                    Mix_PlayChannel(-1, sound, 0);     // se reproduce un sonido en un canal libre                      
-
-                 //   Mix_HaltMusic();
-                 //   Mix_HaltChannel(-1);
-                }
-
-                //  if (music) Mix_FreeMusic(music); // liberar memoria
-                //  if (sound) Mix_FreeChunk(sound);
-
-
-                 // Mix_CloseAudio(); // Para cerrar
+                canPlayMusic = true;
+                music = nullptr;
+                sound = nullptr;
             }
         }
     }
 
-    void AudioManager::PlayMusic() {
-       // Mix_FadeInMusic(music, -1, 4000);
+    void AudioManager::PlayMusic(const char * routeMusic) {
+        if (canPlayMusic == false) return;
+        if (!(music = Mix_LoadMUS(routeMusic)))
+        {
+            SDL_Log("No se ha podido cargar el audio.");
+        }
+        else
+        {
+            /** Se inicia la reproducción de la música en bucle con un fundido: */
+            Mix_FadeInMusic(music, -1, 4000);
+        }
     }
-    void AudioManager::PlaySound() {
-      //  Mix_PlayChannel(-1, sound, 0);     /** se reproduce un sonido en un canal libre */
+    void AudioManager::PlaySound(const char* routeSound) {
+        if (canPlayMusic == false) return;
+        if (!(sound = Mix_LoadWAV(routeSound)))
+        {
+            SDL_Log("No se ha podido cargar el audio.");
+        }
+        else
+        {
+            /** se reproduce un sonido en un canal libre */
+            Mix_PlayChannel(-1, sound, 0);
+        }     
     }
     
     AudioManager::~AudioManager() {
-        //  if (music) Mix_FreeMusic(music); /** liberar memoria */
-        //  if (sound) Mix_FreeChunk(sound);
+        /** Liberar memoria */
+        if (music) Mix_FreeMusic(music); 
+        if (sound) Mix_FreeChunk(sound);
 
-        // Mix_CloseAudio(); // Para cerrar
+        /** Para cerrar */
+        Mix_CloseAudio(); 
     }
 }

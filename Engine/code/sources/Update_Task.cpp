@@ -1,3 +1,7 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #include "Update_Task.h"
 #include "Controller_Component.h"
 #include "Scene.h"

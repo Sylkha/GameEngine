@@ -11,6 +11,7 @@
 using namespace std;
 using namespace glt;
 namespace gameEngine {
+	/** Componente para añadir un modelo a un entity */
 	class Model_Component : public Component{
 	public:
 		shared_ptr <Model> model;

@@ -22,11 +22,11 @@ namespace gameEngine {
 
 	public:
 		Kernel();
-		void add_task(Task& t); // otra para el consumable
+		void add_task(Task& t);
 		void delete_consumable_task();
 		/** Para parar la función run */
 		void stop() { stopped = true; }
 
-		void run(Window & window);
+		void run();
 	};
 }

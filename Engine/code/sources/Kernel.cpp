@@ -18,7 +18,7 @@ namespace gameEngine {
 		consumable_task_list.clear();
 	}
 
-	void Kernel::run(Window & window) {
+	void Kernel::run() {
 		stopped = false;
 		Timer timer;
 		/** Para el primer fotograma */
@@ -29,29 +29,6 @@ namespace gameEngine {
 			timer.start();
 			for (auto task : consumable_task_list) { task->run(delta); }
 			delete_consumable_task();
-			Window::Event event;
-
-			while (window.poll(event))
-			{
-				switch (event.type)
-				{
-				case Window::Event::CLOSE:
-				{
-					stopped = true;
-					break;
-				}
-
-				case Window::Event::KEY_PRESSED:
-				{
-					if (event.data.keyboard.key_code == Keyboard::KEY_ESCAPE)
-					{
-						stopped = true;
-					}
-
-					break;
-				}
-				}
-			}
 			for (auto task : task_list) { task->run(delta); }
 			delta = timer.elapsed_seconds(); /** Para calcular cuánto tarda de estimación por las tareas. */
 		} while (!stopped);

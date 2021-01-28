@@ -1,61 +1,36 @@
-
 // Code released into the public domain
-// in January 2019
-// by Ángel
+// in January 2021
+// by Silvia
 
 #include <Window.hpp>
 #include <Scene.h>
 #include <AudioManager.h>
+#include <Player_Controller.h>
 
 using namespace gameEngine;
 
 int main()
 {
-    // Se crea una ventana:
+    /** Se crea una ventana: */
 
     Window window("TEST", 1280, 720/*, true*/);
 
     window.enable_vsync();
 
-    // Se crea un renderer que usa OpenGL Toolkit:
+    /** Creamos el audio manager y la escena */
 
-    //AudioManager audiomanager;
+    AudioManager audiomanager;
+    const char* music = "../../assets/rainforest-ambience.ogg";
+    const char* sound = "../../assets/throw-knife.wav";
+    //audiomanager.PlaySound(sound);
 
     Scene scene(window);
 
+    /** Asignamos el controlador del player a la escena */
+    shared_ptr<Player_Controller> player = make_shared<Player_Controller>(scene);
+    scene.addController("Player", player);
 
-
-    // Se ejecuta el bucle principal:
-/*
-    bool exit = false;
-
-    while (!exit)
-    {
-        Window::Event event;
-
-        while (window.poll(event))
-        {
-            switch (event.type)
-            {
-            case Window::Event::CLOSE:
-            {
-                exit = true;
-                break;
-            }
-
-            case Window::Event::KEY_PRESSED:
-            {
-                if (event.data.keyboard.key_code == Keyboard::KEY_ESCAPE)
-                {
-                    exit = true;
-                }
-
-                break;
-            }
-            }
-        }
-
-    }*/
+    scene.run();
 
     return 0;
 }

@@ -9,6 +9,7 @@
 using namespace std;
 using namespace glt;
 namespace gameEngine {
+	/** Componente para añadir un componente luz a un entity */
 	class Light_Component : public Component{
 	public:
 		shared_ptr<Light> light;

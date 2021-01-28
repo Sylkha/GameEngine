@@ -1,3 +1,7 @@
+// Code released into the public domain
+// in January 2021
+// by Silvia
+
 #pragma once
 
 #include "Component.h"
@@ -5,6 +9,7 @@
 
 using namespace std;
 namespace gameEngine {
+	/** Clase a través de la cual accedemos al controlador del entity asignado o accedemos a él */
 	class Controller_Component : public Component {
 		shared_ptr<Controller> controller;
 

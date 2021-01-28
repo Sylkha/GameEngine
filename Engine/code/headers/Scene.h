@@ -13,7 +13,10 @@
 #include <Cube.hpp>
 #include "Messenger.h"
 #include "Controller.h"
+#include "Controller_Component.h"
 #include "Update_Task.h"
+#include "Input_Mapper.h"
+#include "Input_Task.h"
 
 using namespace std;
 namespace gameEngine {
@@ -22,6 +25,8 @@ namespace gameEngine {
 		Kernel kernel;
 		Render_System render_system;
 		Update_Task update_task;
+		Input_Mapper input_mapper;
+		Input_Task input_task;
 
 		typedef map <string, shared_ptr<Entity>> entityList;
 		entityList entities;
@@ -30,7 +35,9 @@ namespace gameEngine {
 		map <string, shared_ptr<Controller>> controllers;
 
 	public:
-		Scene(Window& w) : window(w), render_system(*this, 1), update_task(*this, 0) { 
+		Scene(Window& w) : window(w), render_system(*this, 3), update_task(*this, 2), input_mapper(*this, 1), input_task(*this, 0) { 
+			kernel.add_task(input_task);
+			kernel.add_task(input_mapper);
 			kernel.add_task(update_task);
 			kernel.add_task(render_system);
 			/** Creamos los entities */
@@ -66,20 +73,20 @@ namespace gameEngine {
 			entities[entity_light->get_IDNombre()] = entity_light;
 			entities[entity_model->get_IDNombre()] = entity_model;
 
-			run();
 		}
 
 	public:
-		Window& get_window() { // Pasamos la referencia de la ventana
-			return window;
-		}
+		Window& get_window() { return window; }
 		entityList& getEntities() { return entities; }
 
 		Messenger& getMessenger() { return messenger; }
 
+		Input_Mapper& getInput_Mapper() { return input_mapper; }
+
 		bool addController(string id, shared_ptr<Controller> controller)
 		{ 
-			if (controllers.count(id) != 0) // Si ese id existe, no lo añadimos
+			/** Si ese id existe, no lo añadimos */
+			if (controllers.count(id) != 0) 
 				return false;
 			else {
 				controllers[id] = controller;
@@ -88,7 +95,12 @@ namespace gameEngine {
 		}
 
 		void run() {
-			kernel.run(window);
+			/** Creamos el componente y lo asignamos a la entidad que corresponde. Con un xml no haría falta poner estas cosas en la escena */
+			shared_ptr<Controller_Component>  controller_c = make_shared<Controller_Component>();
+			controller_c->set_Controller(controllers["Player"]);
+			entities["mycube"]->addComponent("controller", controller_c.get());
+
+			kernel.run();
 		}
 		void stop() {
 			kernel.stop();
