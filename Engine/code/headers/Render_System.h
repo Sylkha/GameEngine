@@ -43,5 +43,7 @@ namespace gameEngine {
 		void addObject(string ID, shared_ptr<Light>light);
 		/** Si tenemos más de una cámara, elegimos cúal va a ser la que esté activa */
 		void setActiveCamera(string ID);
+		/** Para poner en invisible objetos */
+		void removeObject(string ID);
 	};
 }

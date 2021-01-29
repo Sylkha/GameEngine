@@ -25,7 +25,15 @@ namespace gameEngine {
 		Scene& scene;
 
 	public:
+		Entity();
 		Entity(Scene& scene, string IDNombre) : scene(scene), IDNombre(IDNombre) { parent = nullptr; };
+		Entity& operator = (Entity& entity)  { 
+			this->components = entity.components;
+			this->transform = entity.transform; 
+			this->parent = entity.parent;
+			this->IDNombre = entity.IDNombre;
+			return *this;
+		}
 
 		/** Añadimos componentes a nuestro entity */
 		void addComponent(Id, Component* c);

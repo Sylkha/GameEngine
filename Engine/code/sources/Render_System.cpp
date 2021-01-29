@@ -30,6 +30,10 @@ namespace gameEngine {
 		renderer->set_active_camera(ID);
 	}
 
+	void Render_System::removeObject(string ID) {
+		renderer->get(ID)->set_visible(false);
+	}
+
 	void Render_System::run(float time) {
 		/** Se ajusta el viewport por si el tamaño de la ventana ha cambiado: */
         GLsizei width = GLsizei(scene.get_window().get_width());

@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\headers\Numbers_Controller.h" />
+    <ClInclude Include="..\..\code\headers\Player_Controller.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\sources\main.cpp" />
+    <ClCompile Include="..\..\code\sources\Numbers_Controller.cpp" />
+    <ClCompile Include="..\..\code\sources\Player_Controller.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -116,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\..\Engine\code\headers;..\..\..\Engine\libraries/sdl2-2.0/include;..\..\..\Engine\libraries/opengl-toolkit/include;..\..\..\Engine\libraries/sdl2-mixer-vs/include;..\..\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\Engine\code\headers;..\..\..\Engine\libraries/sdl2-2.0/include;..\..\..\Engine\libraries/opengl-toolkit/include;..\..\..\Engine\libraries/sdl2-mixer-vs/include;..\..\code\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,13 +153,6 @@
       <AdditionalDependencies>Engine.lib;opengl32.lib;winmm.lib;version.lib;imm32.lib;Setupapi.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\code\main.cpp" />
-    <ClCompile Include="..\..\code\Player_Controller.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\code\Player_Controller.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
