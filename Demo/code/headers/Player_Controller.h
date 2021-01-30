@@ -16,7 +16,7 @@ class Player_Controller : public Controller, public Observer{
 	bool movLeft;
 	bool movRight;
 	/** En este array dejaremos marcados los números que hemos recogido (ID 0 será numero 1, y así) */
-	bool numbers_taken[4] = { false };
+	size_t num_taken_count = 0;
 
 public:
 	Scene& scene;
@@ -32,7 +32,7 @@ public:
 	/** Aquí se llevan a cabo las acciones */
 	void update(Entity& entity, float deltatime) override;
 
-	bool getNumbers(size_t ID) { return numbers_taken[ID]; }
-	void takeNumber(size_t num) { numbers_taken[num] = true; }
+	size_t getNumbers() { return num_taken_count; }
+	void takeNumber() { num_taken_count++; }
 
 };

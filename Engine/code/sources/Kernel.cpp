@@ -9,10 +9,14 @@ namespace gameEngine {
 	Kernel::Kernel(){}
 
 	void Kernel::add_task(Task& t) {
-		if (t.consumable() == false)
-			task_list.insert(&t);
-		else
-			consumable_task_list.insert(&t);
+		if (t.consumable() == false) {
+			if (task_list.find(&t) == task_list.end())
+				task_list.insert(&t);
+		}
+		else {
+			if (consumable_task_list.find(&t) == consumable_task_list.end())
+				consumable_task_list.insert(&t);
+		}
 	}
 	void Kernel::delete_consumable_task() {
 		consumable_task_list.clear();

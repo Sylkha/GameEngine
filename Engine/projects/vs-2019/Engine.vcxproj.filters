@@ -96,6 +96,9 @@
     <ClInclude Include="..\..\code\headers\Input_Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\code\headers\Destroy_Task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\code\sources\Window.cpp">
@@ -141,6 +144,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\code\sources\Input_Task.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\sources\Destroy_Task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

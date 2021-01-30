@@ -18,17 +18,19 @@ class Numbers_Controller : public Controller {
 	AudioManager& audio;
 	const char* sound;
 
-	Entity player_Entity;
+	shared_ptr<Entity> player_Entity;
+
+	bool sound_control = false;
 
 public:
 	Scene& scene;
 
 	Numbers_Controller(Scene& scene, string player_entity_ID,Player_Controller & player_Controller, size_t ID, AudioManager& audio, const char* sound) 
-		: scene(scene), player_entity_ID(player_entity_ID), player_Controller(player_Controller), ID(ID), audio(audio), sound(sound), player_Entity(scene, "id") {
+		: scene(scene), player_entity_ID(player_entity_ID), player_Controller(player_Controller), ID(ID), audio(audio), sound(sound){
 	
 		for (auto& entity : scene.getEntities()) {
 			if (entity.first == player_entity_ID) {
-				player_Entity = entity;
+				player_Entity = entity.second;
 			}
 		}
 	

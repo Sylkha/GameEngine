@@ -27,14 +27,9 @@ namespace gameEngine {
 	public:
 		Entity();
 		Entity(Scene& scene, string IDNombre) : scene(scene), IDNombre(IDNombre) { parent = nullptr; };
-		Entity& operator = (Entity& entity)  { 
-			this->components = entity.components;
-			this->transform = entity.transform; 
-			this->parent = entity.parent;
-			this->IDNombre = entity.IDNombre;
-			return *this;
+		bool operator ==(Entity const& entity) {
+			return this->components == entity.components && this->transform == entity.transform && this->parent == entity.parent && this->IDNombre == entity.IDNombre;
 		}
-
 		/** Añadimos componentes a nuestro entity */
 		void addComponent(Id, Component* c);
 		/** Busca en el mapa el id para devolver el respectivo componente */

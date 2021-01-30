@@ -101,6 +101,7 @@
     <ClInclude Include="..\..\code\headers\Component.h" />
     <ClInclude Include="..\..\code\headers\Controller.h" />
     <ClInclude Include="..\..\code\headers\Controller_Component.h" />
+    <ClInclude Include="..\..\code\headers\Destroy_Task.h" />
     <ClInclude Include="..\..\code\headers\Entity.h" />
     <ClInclude Include="..\..\code\headers\Input_Mapper.h" />
     <ClInclude Include="..\..\code\headers\Input_Task.h" />
@@ -126,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\code\sources\AudioManager.cpp" />
+    <ClCompile Include="..\..\code\sources\Destroy_Task.cpp" />
     <ClCompile Include="..\..\code\sources\Entity.cpp" />
     <ClCompile Include="..\..\code\sources\finalize.cpp" />
     <ClCompile Include="..\..\code\sources\initialize.cpp" />

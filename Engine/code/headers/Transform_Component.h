@@ -13,5 +13,9 @@ namespace gameEngine {
 		Matrix44 transform;
 
 		Transform_Component() { }
+
+		bool operator ==(Transform_Component const& transform) {
+			return this->transform == transform.transform;
+		}
 	};
 }

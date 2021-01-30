@@ -18,6 +18,7 @@
 #include "Update_Task.h"
 #include "Input_Mapper.h"
 #include "Input_Task.h"
+#include "Destroy_Task.h"
 
 using namespace glm;
 using namespace std;
@@ -29,6 +30,7 @@ namespace gameEngine {
 		Update_Task update_task;
 		Input_Mapper input_mapper;
 		Input_Task input_task;
+		Destroy_Task destroy_task;
 
 		typedef map <string, shared_ptr<Entity>> entityList;
 		entityList entities;
@@ -37,11 +39,12 @@ namespace gameEngine {
 		map <string, shared_ptr<Controller>> controllers;
 
 	public:
-		Scene(Window& w) : window(w), render_system(*this, 3), update_task(*this, 2), input_mapper(*this, 1), input_task(*this, 0) { 
+		Scene(Window& w) : window(w), render_system(*this, 3), update_task(*this, 2), input_mapper(*this, 1), input_task(*this, 0), destroy_task(*this, 0){ 
 			kernel.add_task(input_task);
 			kernel.add_task(input_mapper);
 			kernel.add_task(update_task);
 			kernel.add_task(render_system);
+
 			/** Creamos los entities */
 			shared_ptr<Entity> entity_camera = make_shared<Entity>(*this, "camera");
 			shared_ptr<Entity> entity_light = make_shared<Entity>(*this, "light");
@@ -173,16 +176,21 @@ namespace gameEngine {
 
 			shared_ptr<Controller_Component>  controller_num4 = make_shared<Controller_Component>();
 			controller_num4->set_Controller(controllers["Num4"]);
-			entities["numberOne"]->addComponent("controller", controller_num4.get());
+			entities["numberFour"]->addComponent("controller", controller_num4.get());
 
 			shared_ptr<Controller_Component>  controller_num5 = make_shared<Controller_Component>();
 			controller_num5->set_Controller(controllers["Num5"]);
-			entities["numberOne"]->addComponent("controller", controller_num5.get());
+			entities["numberFive"]->addComponent("controller", controller_num5.get());
 
 			kernel.run();
 		}
 		void stop() {
 			kernel.stop();
+		}
+		
+		void destroy(Entity entityToDestroy) {
+			destroy_task.addEntities(entityToDestroy);
+			kernel.add_task(destroy_task);
 		}
 	};
 }
