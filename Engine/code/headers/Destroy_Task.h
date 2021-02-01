@@ -10,7 +10,9 @@
 
 using namespace std;
 namespace gameEngine {
-	/** Esta clase es una task consumible que necesitamos para  */
+	/** Esta clase es una task consumible que necesitamos para retirar aquellos objetos
+	*   que, en tiempo de ejecución, queremos que dejen de ser renderizados (que desaparezcan).
+	*/
 	class Scene;
 	class Destroy_Task : public Task {
 	public:
@@ -22,6 +24,7 @@ namespace gameEngine {
 		bool consumable()const override { return true; }
 		void run(float time)override;
 
+		/** Añadimos a nuestra lista de entities, aquellos entities que queremos dejar de renderizar */
 		void addEntities(Entity entity);
 	};
 	

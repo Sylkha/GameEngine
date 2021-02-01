@@ -39,8 +39,10 @@ namespace gameEngine {
 		}
 
 		void send_Messages(Message& mes) {
-			auto messageObserver = observers.find(mes.id); // buscamos los observers suscritos al id de ese mensaje
-			if (messageObserver != observers.end()) { // Ha encontrado los observers que están suscritos al id del mensaje que vamos a enviar
+			/**buscamos los observers suscritos al id de ese mensaje */
+			auto messageObserver = observers.find(mes.id);
+			/** Ha encontrado los observers que están suscritos al id del mensaje que vamos a enviar */
+			if (messageObserver != observers.end()) { 
 				for (auto& obs : messageObserver->second) {
 					obs->handle(mes);
 				}

@@ -20,6 +20,7 @@ class Numbers_Controller : public Controller {
 
 	shared_ptr<Entity> player_Entity;
 
+	/** Este bool nos sirve para que solo se reproduzca una vez el sonido. */
 	bool sound_control = false;
 
 public:
@@ -27,7 +28,7 @@ public:
 
 	Numbers_Controller(Scene& scene, string player_entity_ID,Player_Controller & player_Controller, size_t ID, AudioManager& audio, const char* sound) 
 		: scene(scene), player_entity_ID(player_entity_ID), player_Controller(player_Controller), ID(ID), audio(audio), sound(sound){
-	
+		/** Buscamos al entity player */
 		for (auto& entity : scene.getEntities()) {
 			if (entity.first == player_entity_ID) {
 				player_Entity = entity.second;

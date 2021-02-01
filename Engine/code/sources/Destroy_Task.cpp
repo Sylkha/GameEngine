@@ -12,16 +12,19 @@ namespace gameEngine {
 	void Destroy_Task::finalize() { }
 
 	void Destroy_Task::addEntities(Entity entity) {
-		if (entities.end() == find(entities.begin(), entities.end(), entity)) { // Que no haya dos entities iguales
+		/** Que no recoja varias veces el mismo objeto */
+		if (entities.end() == find(entities.begin(), entities.end(), entity)) { 
 			entities.push_back(entity);
 		}
 	}
 
 	void Destroy_Task::run(float time) {
 		for (auto& entity : entities) {
+			/** Hacemos invisible el entity y lo quitamos de la lista de entities de la escena  */
 			scene.getRender_System().removeObject(entity.get_IDNombre());
 			scene.getEntities().erase(entity.get_IDNombre());
 		}
+		/** Limpiamos nuestra lista */
 		entities.clear();
 	}
 }
