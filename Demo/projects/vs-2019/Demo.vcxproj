@@ -19,10 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\code\headers\Limits_Controller.h" />
     <ClInclude Include="..\..\code\headers\Numbers_Controller.h" />
     <ClInclude Include="..\..\code\headers\Player_Controller.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\code\sources\Limits_Controller.cpp" />
     <ClCompile Include="..\..\code\sources\main.cpp" />
     <ClCompile Include="..\..\code\sources\Numbers_Controller.cpp" />
     <ClCompile Include="..\..\code\sources\Player_Controller.cpp" />

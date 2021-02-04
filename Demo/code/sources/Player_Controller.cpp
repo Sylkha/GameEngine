@@ -41,19 +41,19 @@ void Player_Controller::handle(Message& mess) {
 void Player_Controller::update(Entity& entity, float deltatime) {
 
 	if (movLeft == true) {
-		entity.set_transform(translate(entity.get_transform(), Vector3(-0.05, 0, 0)));
+		entity.set_transform(translate(entity.get_transform(), Vector3(-speed, 0, 0)));
 	}
 
 	if (movUp == true) {
-		entity.set_transform(translate(entity.get_transform(), Vector3(0, 0.05, 0)));
+		entity.set_transform(translate(entity.get_transform(), Vector3(0, speed, 0)));
 	}
 
 	if (movDown == true) {
-		entity.set_transform(translate(entity.get_transform(), Vector3(0, -0.05, 0)));
+		entity.set_transform(translate(entity.get_transform(), Vector3(0, -speed, 0)));
 	}
 
 	if (movRight == true) {
-		entity.set_transform(translate(entity.get_transform(), Vector3(0.05, 0, 0)));
+		entity.set_transform(translate(entity.get_transform(), Vector3(speed, 0, 0)));
 	}
 
 }

@@ -7,6 +7,7 @@
 #include <AudioManager.h>
 #include <Player_Controller.h>
 #include "Numbers_Controller.h"
+#include "Limits_Controller.h"
 
 using namespace gameEngine;
 
@@ -40,6 +41,15 @@ int main()
     scene.addController("Num4", num4);
     shared_ptr<Numbers_Controller> num5 = make_shared<Numbers_Controller>(scene, "myplayer", *player.get(), 4, audiomanager, sound);
     scene.addController("Num5", num5);
+
+    shared_ptr<Limits_Controller> lim1 = make_shared<Limits_Controller>(scene, "myplayer", *player.get(), Left);
+    scene.addController("Rec1", lim1);
+    shared_ptr<Limits_Controller> lim2 = make_shared<Limits_Controller>(scene, "myplayer", *player.get(), Up);
+    scene.addController("Rec2", lim2);
+    shared_ptr<Limits_Controller> lim3 = make_shared<Limits_Controller>(scene, "myplayer", *player.get(), Right);
+    scene.addController("Rec3", lim3);
+    shared_ptr<Limits_Controller> lim4 = make_shared<Limits_Controller>(scene, "myplayer", *player.get(), Down);
+    scene.addController("Rec4", lim4);
 
     scene.run();
 

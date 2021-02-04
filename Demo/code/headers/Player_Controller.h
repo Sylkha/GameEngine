@@ -18,6 +18,8 @@ class Player_Controller : public Controller, public Observer{
 	/** En este array dejaremos marcados los números que hemos recogido (ID 0 será numero 1, y así) */
 	size_t num_taken_count = 0;
 
+	float speed = 0.05f;
+
 public:
 	Scene& scene;
 
@@ -34,5 +36,7 @@ public:
 
 	size_t getNumbers() { return num_taken_count; }
 	void takeNumber() { num_taken_count++; }
+
+	float getSpeed() { return speed; }
 
 };

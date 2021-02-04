@@ -48,30 +48,49 @@ namespace gameEngine {
 			/** Creamos los entities */
 			shared_ptr<Entity> entity_camera = make_shared<Entity>(*this, "camera");
 			shared_ptr<Entity> entity_light = make_shared<Entity>(*this, "light");
-			shared_ptr<Entity> entity_model = make_shared<Entity>(*this, "myplayer"); /** This id must change if we create more models */
+			shared_ptr<Entity> entity_model = make_shared<Entity>(*this, "myplayer"); 
+
 			shared_ptr<Entity> entity_model_n1 = make_shared<Entity>(*this, "numberOne"); 
 			shared_ptr<Entity> entity_model_n2 = make_shared<Entity>(*this, "numberTwo"); 
 			shared_ptr<Entity> entity_model_n3 = make_shared<Entity>(*this, "numberThree"); 
 			shared_ptr<Entity> entity_model_n4 = make_shared<Entity>(*this, "numberFour"); 
 			shared_ptr<Entity> entity_model_n5 = make_shared<Entity>(*this, "numberFive"); 
 
+			shared_ptr<Entity> entity_model_r1 = make_shared<Entity>(*this, "rectangleOne"); 
+			shared_ptr<Entity> entity_model_r2 = make_shared<Entity>(*this, "rectangleTwo"); 
+			shared_ptr<Entity> entity_model_r3 = make_shared<Entity>(*this, "rectangleThree"); 
+			shared_ptr<Entity> entity_model_r4 = make_shared<Entity>(*this, "rectangleFour"); 
+
 			/** Creamos los componentes y se los añadimos a cada entity que tengamos pensado que vaya a tener dicho componente */
 			Camera_Component* camera_component = new Camera_Component();
+			Light_Component* light_component = new Light_Component();
 			Model_Component* model_component = new Model_Component();
+
 			Model_Component* model_component_n1 = new Model_Component();
 			Model_Component* model_component_n2 = new Model_Component();
 			Model_Component* model_component_n3 = new Model_Component();
 			Model_Component* model_component_n4 = new Model_Component();
 			Model_Component* model_component_n5 = new Model_Component();
-			Light_Component* light_component = new Light_Component();
+
+			Model_Component* model_component_r1 = new Model_Component();
+			Model_Component* model_component_r2 = new Model_Component();
+			Model_Component* model_component_r3 = new Model_Component();
+			Model_Component* model_component_r4 = new Model_Component();
+
 			entity_camera->addComponent("camera", camera_component);
 			entity_model->addComponent("model", model_component);
+			entity_light->addComponent("light", light_component);
+
 			entity_model_n1->addComponent("model", model_component_n1);
 			entity_model_n2->addComponent("model", model_component_n2);
 			entity_model_n3->addComponent("model", model_component_n3);
 			entity_model_n4->addComponent("model", model_component_n4);
 			entity_model_n5->addComponent("model", model_component_n5);
-			entity_light->addComponent("light", light_component);
+
+			entity_model_r1->addComponent("model", model_component_r1);
+			entity_model_r2->addComponent("model", model_component_r2);
+			entity_model_r3->addComponent("model", model_component_r3);
+			entity_model_r4->addComponent("model", model_component_r4);
 
 			/** Necesitamos crear un modelo para añadirselo al model component. También necesitamos añadir las mallas a los modelos antes de añadirlos a la escena */
 			shared_ptr<Model> bunny(new Model_Obj("../../assets/stanford-bunny.obj"));
@@ -88,15 +107,33 @@ namespace gameEngine {
 			shared_ptr<Model> num5(new Model_Obj("../../assets/Number5.obj"));
 			model_component_n5->set_model(num5);
 
+			shared_ptr<Model> rec1(new Model_Obj("../../assets/Cube.obj"));
+			model_component_r1->set_model(rec1);
+			shared_ptr<Model> rec2(new Model_Obj("../../assets/Cube.obj"));
+			model_component_r2->set_model(rec2);
+			shared_ptr<Model> rec3(new Model_Obj("../../assets/Cube.obj"));
+			model_component_r3->set_model(rec3);
+			shared_ptr<Model> rec4(new Model_Obj("../../assets/Cube.obj"));
+			model_component_r4->set_model(rec4);
+
+			/** Que nos siga la cámara */
+			entity_camera->set_parent(entity_model);
 			/** Colocamos los objetos en el espacio */
+			entity_camera->set_transform(translate(entity_camera->get_transform(), Vector3(0.f, 0.f, 10.f)));
+			entity_light->set_transform(translate(entity_light->get_transform(), Vector3(10.f, 10.f, 10.f)));
 			entity_model->set_transform(translate(entity_model->get_transform(), Vector3(0.f, 0.f, -10.f)));
+
 			entity_model_n1->set_transform(translate(entity_model_n1->get_transform(), Vector3(-10.f, 4.f, -10.f)));
 			entity_model_n2->set_transform(translate(entity_model_n2->get_transform(), Vector3(0.f, 4.f, -10.f)));
 			entity_model_n3->set_transform(translate(entity_model_n3->get_transform(), Vector3(10.f, 0.f, -10.f)));
 			entity_model_n4->set_transform(translate(entity_model_n4->get_transform(), Vector3(0.f, -5.f, -10.f)));
 			entity_model_n5->set_transform(translate(entity_model_n5->get_transform(), Vector3(-10.f, -4.f, -10.f)));
-			entity_camera->set_transform(translate(entity_camera->get_transform(), Vector3(0.f, 0.f, 0.f)));
-			entity_light->set_transform(translate(entity_light->get_transform(), Vector3(10.f, 10.f, 10.f)));
+
+			entity_model_r1->set_transform(translate(entity_model_r1->get_transform(), Vector3(-15.f, 0.f, -12.f)));
+			entity_model_r2->set_transform(translate(entity_model_r2->get_transform(), Vector3(0.f, 10.f, -12.f)));
+			entity_model_r3->set_transform(translate(entity_model_r3->get_transform(), Vector3(15.f, 0.f, -12.f)));
+			entity_model_r4->set_transform(translate(entity_model_r4->get_transform(), Vector3(0.f, -10.f, -12.f)));
+
 
 			/** Rotamos los objetos */
 			entity_model_n1->set_transform(glm::rotate(entity_model_n1->get_transform(), 90.f ,Vector3(-1,0,0)));
@@ -105,33 +142,51 @@ namespace gameEngine {
 			entity_model_n4->set_transform(glm::rotate(entity_model_n4->get_transform(), 90.f ,Vector3(-1,0,0)));
 			entity_model_n5->set_transform(glm::rotate(entity_model_n5->get_transform(), 90.f ,Vector3(-1,0,0)));
 
+
 			/** Escalamos los objetos */
 			entity_model_n1->set_transform(scale(entity_model_n1->get_transform(), 0.2));
 			entity_model_n2->set_transform(scale(entity_model_n2->get_transform(), 0.2));
 			entity_model_n3->set_transform(scale(entity_model_n3->get_transform(), 0.2));
 			entity_model_n4->set_transform(scale(entity_model_n4->get_transform(), 0.2));
 			entity_model_n5->set_transform(scale(entity_model_n5->get_transform(), 0.2));
+
+			entity_model_r1->set_transform(scale(entity_model_r1->get_transform(), Vector3(0.5, 10.5, 0.5))); // derecha
+			entity_model_r2->set_transform(scale(entity_model_r2->get_transform(), Vector3(15, 0.5, 0.5))); // el de arriba
+			entity_model_r3->set_transform(scale(entity_model_r3->get_transform(), Vector3(0.5, 10.5, 0.5))); // izquierda
+			entity_model_r4->set_transform(scale(entity_model_r4->get_transform(), Vector3(15, 0.5, 0.5))); // el de abajo
 			
 			/** Añadimos los nodos a la escena */
 			render_system.addObject(entity_camera->get_IDNombre(), camera_component->get_camera());
 			render_system.setActiveCamera(entity_camera->get_IDNombre());
 			render_system.addObject(entity_light->get_IDNombre(), light_component->get_light());
 			render_system.addObject(entity_model->get_IDNombre(), model_component->get_model());
+
 			render_system.addObject(entity_model_n1->get_IDNombre(), model_component_n1->get_model());
 			render_system.addObject(entity_model_n2->get_IDNombre(), model_component_n2->get_model());
 			render_system.addObject(entity_model_n3->get_IDNombre(), model_component_n3->get_model());
 			render_system.addObject(entity_model_n4->get_IDNombre(), model_component_n4->get_model());
 			render_system.addObject(entity_model_n5->get_IDNombre(), model_component_n5->get_model());
 
+			render_system.addObject(entity_model_r1->get_IDNombre(), model_component_r1->get_model());
+			render_system.addObject(entity_model_r2->get_IDNombre(), model_component_r2->get_model());
+			render_system.addObject(entity_model_r3->get_IDNombre(), model_component_r3->get_model());
+			render_system.addObject(entity_model_r4->get_IDNombre(), model_component_r4->get_model());
+
 			/** Guardamos los entities en un map (que los recoge y actualiza su transform) */
 			entities[entity_camera->get_IDNombre()] = entity_camera;
 			entities[entity_light->get_IDNombre()] = entity_light;
 			entities[entity_model->get_IDNombre()] = entity_model;
+
 			entities[entity_model_n1->get_IDNombre()] = entity_model_n1;
 			entities[entity_model_n2->get_IDNombre()] = entity_model_n2;
 			entities[entity_model_n3->get_IDNombre()] = entity_model_n3;
 			entities[entity_model_n4->get_IDNombre()] = entity_model_n4;
 			entities[entity_model_n5->get_IDNombre()] = entity_model_n5;
+
+			entities[entity_model_r1->get_IDNombre()] = entity_model_r1;
+			entities[entity_model_r2->get_IDNombre()] = entity_model_r2;
+			entities[entity_model_r3->get_IDNombre()] = entity_model_r3;
+			entities[entity_model_r4->get_IDNombre()] = entity_model_r4;
 
 		}
 
@@ -181,6 +236,22 @@ namespace gameEngine {
 			shared_ptr<Controller_Component>  controller_num5 = make_shared<Controller_Component>();
 			controller_num5->set_Controller(controllers["Num5"]);
 			entities["numberFive"]->addComponent("controller", controller_num5.get());
+
+			shared_ptr<Controller_Component>  controller_r1 = make_shared<Controller_Component>();
+			controller_r1->set_Controller(controllers["Rec1"]);
+			entities["rectangleOne"]->addComponent("controller", controller_r1.get());
+
+			shared_ptr<Controller_Component>  controller_r2 = make_shared<Controller_Component>();
+			controller_r2->set_Controller(controllers["Rec2"]);
+			entities["rectangleTwo"]->addComponent("controller", controller_r2.get());
+
+			shared_ptr<Controller_Component>  controller_r3 = make_shared<Controller_Component>();
+			controller_r3->set_Controller(controllers["Rec3"]);
+			entities["rectangleThree"]->addComponent("controller", controller_r3.get());
+
+			shared_ptr<Controller_Component>  controller_r4 = make_shared<Controller_Component>();
+			controller_r4->set_Controller(controllers["Rec4"]);
+			entities["rectangleFour"]->addComponent("controller", controller_r4.get());
 
 			kernel.run();
 		}
