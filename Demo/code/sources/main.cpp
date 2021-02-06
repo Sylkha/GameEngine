@@ -21,14 +21,14 @@ int main()
 
     /** Creamos el audio manager y la escena */
 
-    AudioManager audiomanager;
-    const char* music = "../../assets/rainforest-ambience.ogg";
-    const char* sound = "../../assets/throw-knife.wav";
+    AudioManager audiomanager; 
+    const char* sound = "../../assets/On_CoolDown.wav";
+    const char* sound2 = "../../assets/Cube_Audio.wav";
 
     Scene scene(window);
 
     /** Asignamos el controlador del player a la escena */
-    shared_ptr<Player_Controller> player = make_shared<Player_Controller>(scene);
+    shared_ptr<Player_Controller> player = make_shared<Player_Controller>(scene, audiomanager, sound2);
     scene.addController("Player", player);
 
     shared_ptr<Numbers_Controller> num1 = make_shared<Numbers_Controller>(scene, "myplayer", *player.get(), 0, audiomanager, sound);

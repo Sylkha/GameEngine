@@ -10,7 +10,7 @@
 
 using namespace gameEngine;
 	enum position {Up, Down, Right, Left};
-/** Esta clase la llevan los límites de la pantalla */
+/** Esta clase la llevan los límites de la pantalla para que el jugador no lo sobrepase */
 class Limits_Controller : public Controller {
 	string player_entity_ID;
 	Player_Controller& player_Controller;

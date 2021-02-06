@@ -56,4 +56,9 @@ void Player_Controller::update(Entity& entity, float deltatime) {
 		entity.set_transform(translate(entity.get_transform(), Vector3(speed, 0, 0)));
 	}
 
+	if (num_taken_count > num_max && sound_control == false) {
+		audio.PlaySound(sound);
+		sound_control = true;
+	}
+
 }

@@ -7,6 +7,7 @@
 #include "Observer.h"
 #include "Scene.h"
 #include "Entity.h"
+#include "AudioManager.h"
 
 using namespace gameEngine;
 /** Esta clase lleva el control del jugador */
@@ -15,15 +16,25 @@ class Player_Controller : public Controller, public Observer{
 	bool movDown;
 	bool movLeft;
 	bool movRight;
-	/** En este array dejaremos marcados los números que hemos recogido (ID 0 será numero 1, y así) */
+	/** Este es el contador de números */
 	size_t num_taken_count = 0;
-
+	/** Movimiento del jugador */
 	float speed = 0.05f;
+
+	AudioManager& audio;
+	const char* sound;
+
+	/** Este bool nos sirve para que solo se reproduzca una vez el sonido. */
+	bool sound_control = false;
+
+public:
+	/** Este es el número máximo de números que queremos recoger (menos 1 porque usamos el > para compararlo) */
+	const size_t num_max = 4;
 
 public:
 	Scene& scene;
 
-	Player_Controller(Scene& scene) : scene(scene){
+	Player_Controller(Scene& scene, AudioManager& audio, const char* sound) : scene(scene), audio(audio), sound(sound) {
 		scene.getMessenger().add_Observer("KEY_PRESSED", this);
 		scene.getMessenger().add_Observer("KEY_RELEASED", this);
 	}
